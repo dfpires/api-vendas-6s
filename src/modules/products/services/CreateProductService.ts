@@ -1,3 +1,4 @@
+import AppError from "@shared/errors/AppError";
 import { getCustomRepository } from "typeorm";
 import Product from "../typeorm/entities/Product";
 import ProductRepository from "../typeorm/repositories/ProductRepository";
@@ -17,9 +18,10 @@ class CreateProductService {
         // recupera o repositório do produto
         let productRepository = getCustomRepository(ProductRepository)
         let productExists = await productRepository.findByName(name);
-
+        
+        // regra de negócio
         if (productExists){
-            throw 
+            throw new AppError("Já existe produto com este nome");
             console.log(`Produto já existe`);
         }
 
@@ -34,3 +36,5 @@ class CreateProductService {
         return product;
     }
 }
+
+export default CreateProductService;
