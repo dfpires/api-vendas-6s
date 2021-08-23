@@ -12,4 +12,5 @@ export default class ProductController {
         })
         return response.json(product);
     }
+    
 }
