@@ -1,5 +1,6 @@
-import { Request, Response } from "express";
+import { request, Request, Response } from "express";
 import CreateProductService from "../services/CreateProductService";
+import DeleteProductService from "../services/DeleteProductService";
 
 export default class ProductController {
 
@@ -11,6 +12,18 @@ export default class ProductController {
             name, price, quantity
         })
         return response.json(product);
+    }
+
+    // remove o produto
+    public async delete(request: Request, response: Response): Promise <Response> {
+        // recupera id do produto
+        let {id} = request.params
+        // cria um objeto
+        let deleteProduct = new DeleteProductService()
+        // efetivamente remove
+        await deleteProduct.execute({id}); 
+
+        return response.json([]);
     }
     
 }
