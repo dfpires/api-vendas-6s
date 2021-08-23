@@ -3,6 +3,7 @@ import CreateProductService from "../services/CreateProductService";
 import DeleteProductService from "../services/DeleteProductService";
 import ListProductsService from "../services/ListProductsService";
 import ShowProductService from "../services/ShowProductService";
+import UpdateProductService from "../services/UpdateProductService";
 
 export default class ProductController {
 
@@ -44,5 +45,17 @@ export default class ProductController {
         let showProduct = new ShowProductService()
         let product = await showProduct.execute({id});
         return response.json(product);
+    }
+
+    // atualiza o produto
+    public async update(request: Request, response: Response): Promise<Response> {
+        let {id} = request.params
+        let {name, price, quantity} = request.body
+
+        let updateProduct = new UpdateProductService();
+
+        let product = await updateProduct.execute({id, name, price, quantity});
+        
+        return response.json(product)
     }
 }
