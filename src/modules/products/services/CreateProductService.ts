@@ -22,7 +22,6 @@ class CreateProductService {
         // regra de negócio
         if (productExists){
             throw new AppError("Já existe produto com este nome");
-            console.log(`Produto já existe`);
         }
 
         // cria um novo produto que não existe
