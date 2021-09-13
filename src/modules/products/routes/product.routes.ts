@@ -11,7 +11,13 @@ let productController = new ProductController()
 
 // não temos nada para validar
 productRouter.get('/', productController.index)
-productRouter.get('/:id', productController.show)
+productRouter.get('/:id', 
+celebrate({
+    [Segments.PARAMS]: {
+        id: Joi.string().uuid().required()
+    }
+}),
+productController.show)
 // validar que o post precisa de um produto
 productRouter.post('/', 
     celebrate({
@@ -22,7 +28,25 @@ productRouter.post('/',
         }
     }),
 productController.create)
-productRouter.put('/:id', productController.update)
-productRouter.delete('/:id', productController.delete)
+productRouter.put('/:id', 
+celebrate({
+    [Segments.PARAMS]: {
+        id: Joi.string().uuid().required()
+    },
+    [Segments.BODY]: {
+        name: Joi.string().required(),
+        price: Joi.number().precision(2).required(),
+        quantity: Joi.number().required()
+    }
+}),
+productController.update)
+productRouter.delete('/:id', 
+
+celebrate({
+    [Segments.PARAMS]: {
+        id: Joi.string().uuid().required()
+    }
+}),
+productController.delete)
 
 export default productRouter
