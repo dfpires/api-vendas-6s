@@ -1,7 +1,6 @@
 
 // vamos criar a interface de coleta de dados
-
-import AppError from "@shared/errors/AppError";
+import AppError from "../../../shared/errors/AppError";
 import { getCustomRepository } from "typeorm";
 import ProductRepository from "../typeorm/repositories/ProductRepository";
 

@@ -1,6 +1,8 @@
 
-import {Repository} from 'typeorm'
+import {EntityRepository, Repository} from 'typeorm'
 import Product from '../entities/Product'
+
+@EntityRepository(Product) // decorando a classe 
 export default class ProductRepository extends Repository<Product> {
 
     // exemplo de uma implementação particular, pois é resto já temos
