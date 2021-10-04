@@ -11,30 +11,29 @@ interface IRequest {
     password: string
 }
 
-class CreateProductService {
+class CreateUserService {
 
     // cria função execute
-    public async execute({name, price, quantity}: IRequest): Promise <Product> {
+    public async execute({name, email, password}: IRequest): Promise <User> {
         // recupera o repositório do produto
-        let productRepository = getCustomRepository(ProductRepository)
-        let productExists = await productRepository.findByName(name);
+        let userRepository = getCustomRepository(UserRepository)
+        let userExists = await userRepository.findByEmail(email);
         
         // regra de negócio
-        if (productExists){
-            console.log(`Vai entrar`)
-            throw new AppError("Já existe produto com este nome");
+        if (userExists){
+            throw new AppError("Já existe usuário com este email");
         }
 
         // cria um novo produto que não existe
-        const product = productRepository.create({
-            name, price, quantity
+        const user = userRepository.create({
+            name, email, password
         })
 
         // salva produto no banco de dados
-        await productRepository.save(product);
+        await userRepository.save(user);
 
-        return product;
+        return user;
     }
 }
 
-export default CreateProductService;
+export default CreateUserService;
