@@ -6,5 +6,10 @@ import productRouter from '../../modules/products/routes/product.routes'
 
 routes.use('/products', productRouter)
 
+import userRouter from '../../modules/users/routes/user.routes'
+
+routes.use('/users', userRouter)
+
+
 // alterar o arquivo para incluir rota de cliente
 export default routes
