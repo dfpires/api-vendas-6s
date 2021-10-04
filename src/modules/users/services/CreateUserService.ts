@@ -2,7 +2,7 @@ import AppError from "../../../shared/errors/AppError";
 import { getCustomRepository } from "typeorm";
 import User from "../typeorm/entities/User";
 import UserRepository from "../typeorm/repository/UserRepository";
-
+import {hash} from "bcryptjs"
 
 // criar um tipo de dado
 interface IRequest {
@@ -24,9 +24,13 @@ class CreateUserService {
             throw new AppError("Já existe usuário com este email");
         }
 
+        const senhaHash = await hash(password, 8)
+
         // cria um novo produto que não existe
         const user = userRepository.create({
-            name, email, password
+            name, 
+            email, 
+            password: senhaHash
         })
 
         // salva produto no banco de dados
