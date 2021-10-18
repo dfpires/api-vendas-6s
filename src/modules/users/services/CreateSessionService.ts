@@ -1,6 +1,6 @@
 // responsável por gerar um token para o usuário
 
-import AppError from "@shared/errors/AppError";
+import AppError from "../../../shared/errors/AppError";
 import { getCustomRepository } from "typeorm";
 import User from "../typeorm/entities/User";
 import UserRepository from "../typeorm/repository/UserRepository";
@@ -35,13 +35,15 @@ class CreateSessionService {
             throw new AppError('Email / Senha inválidos', 401);
         }
 
-        // usuário pode receber o token
+        console.log('usuário pode receber o token')
         // vamos gerar o toke
+        
         const token = sign({}, "dfgsdgdfsgdterwtbcvbgh", {
             subject: user.id,
             expiresIn: '1d'
         })
         // retorna resultado
+        console.log('usuário pode receber o token')
         return {
             user, 
             token

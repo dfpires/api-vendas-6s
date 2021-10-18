@@ -8,7 +8,7 @@ export default class SessionController {
         const {email, password} = request.body;
 
         const createSessionService = new CreateSessionService()
-        const user = createSessionService.execute({
+        const user = await createSessionService.execute({
             email, password
         })
 
