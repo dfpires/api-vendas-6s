@@ -1,4 +1,5 @@
 
+import isAuthenticated from '../../../shared/middleware/isAuthenticated';
 import { celebrate, Segments, Joi } from 'celebrate';
 import {Router} from 'express';
 
@@ -10,7 +11,8 @@ let productRouter = Router()
 let productController = new ProductController()
 
 // não temos nada para validar
-productRouter.get('/', productController.index)
+productRouter.get('/', isAuthenticated, productController.index)
+
 productRouter.get('/:id', 
 celebrate({
     [Segments.PARAMS]: {
