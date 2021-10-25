@@ -1,7 +1,8 @@
 import React from 'react'
+import { Title } from './styles'
 
 export const Dashboard: React.FC = () => {
     return (
-        <h1> Página de Dashboard </h1>
+        <Title> Catálogo de Repositório do GitHub </Title>
     )
 }

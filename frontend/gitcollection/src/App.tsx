@@ -1,9 +1,15 @@
 import React from 'react';
+import {Routes} from './routes/index'
+import {BrowserRouter} from 'react-router-dom'
 
 // criando componentes funcionais
 const App: React.FC = () => {
   return (
-    <h1> Meu primeiro projeto ReactJS com Typescript </h1>
+
+   <BrowserRouter>
+      <Routes/>
+   </BrowserRouter>
+
   );
 }
 
